@@ -50,7 +50,8 @@ class TopicController extends Controller
       }
     
     
-      public function show(Topic $topic){
+      public function show(Topic $topic, $id){
+        $topic = $topic->find($id)->load('comment');
         return response()->json(['topic', $topic]);
       }
     

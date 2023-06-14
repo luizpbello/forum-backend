@@ -17,3 +17,4 @@ use App\Http\Controllers\Forum\TopicController;
 
 Route::get('/comments/{id}', [CommentsController::class, 'show']);
 Route::get('/topics', [TopicController::class, 'index']);
+Route::get('/topics/{id}', [TopicController::class, 'show']);
