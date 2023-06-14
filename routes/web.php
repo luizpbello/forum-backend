@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Forum\CommentsController;
+use App\Http\Controllers\Forum\TopicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/comments/{id}', [CommentsController::class, 'show']);
+Route::get('/topics', [TopicController::class, 'index']);

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Comments;
 use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
@@ -9,6 +10,6 @@ class Topic extends Model
     protected $fillable = ['title', 'content', 'category'];
 
     public function comment(){
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comments::class);
     }
 }
