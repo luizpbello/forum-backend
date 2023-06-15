@@ -47,13 +47,10 @@ class TopicController extends Controller
     {
         try {
             $topic = $topic->find($id);
-
             if (!$topic) {
                 return response()->json(['message' => 'Tópico não encontrado'], 404);
             }
-
-            $topic->delete();
-            
+            $topic->delete();            
             return response()->json(['message' => 'Tópico excluído com sucesso']);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Erro ao excluir o tópico', 'error' => $th->getMessage()], 500);

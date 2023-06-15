@@ -32,9 +32,13 @@ class CommentsController extends Controller
     }
 
 
-    public function show(Comments $comment, $id){
-        $comment = $comment->find($id);
-        return response()->json(['comment', $comment]);
+    public function show( $topicId,  $commentId){
+        try {
+            $comment = Comments::findOrFail($commentId);
+            return response()->json($comment);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Erro ao tentar editar o comentário', 'error' => $th->getMessage()], 500);
+        }
     }
     
     public function destroy($topicId, $commentId)
@@ -48,6 +52,20 @@ class CommentsController extends Controller
         }
     }
     
+
+    public function update(Request $request, $topicId, $commentId){
+        try {
+            $validatedData = $request->validate([
+                'content' => 'required|string',
+            ]);
+            $comment = Comments::findOrFail($commentId);
+            $comment->update($validatedData);
+            return response()->json(['message' => 'Comentário atualizado com sucesso', 'topic' => $comment]);
+
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Erro ao atualizar o comentário', 'error' => $th->getMessage()], 500);
+        }
+    }
     
 
 }

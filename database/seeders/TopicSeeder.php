@@ -15,7 +15,6 @@ class TopicSeeder extends Seeder
         Topic::create([
             'title' => 'Título do tópico',
             'content' => 'Conteúdo do tópico',
-            'user_id' => 1,
             'category_id' => 1,
         ]);
     }

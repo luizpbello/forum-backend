@@ -14,9 +14,7 @@ class CommentSeeder extends Seeder
     public function run(): void
     {
         Comments::create([
-            'user_id' => 1,
             'topic_id' => 1,
-            'category_id' => 1,
             'content' => 'Comentário no primeiro tópico',
         ]);
     }
