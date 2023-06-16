@@ -1,13 +1,15 @@
-import Header from "@/Components/Header"
-import TopicCard from "@/Components/TopicCard"
+import Header from "@/Components/Header";
+import TopicCard from "@/Components/TopicCard";
 
-export default function Home(){
+export default function Home({ topics }) {
     return (
         <div className="">
-          <Header />
-          <div className="w-3/5 mt-8 mx-auto">
-            <TopicCard />
-          </div>
+            <Header />
+            <div className="w-3/5 mt-8 mx-auto">
+                {topics.map((topic) => (
+                    <TopicCard key={topic.id} topic={topic} />
+                ))}
+            </div>
         </div>
-      );
+    );
 }

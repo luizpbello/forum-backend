@@ -1,0 +1,23 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:80
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 2611rs
+      MYSQL_DATABASE: forum_app
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 2611rs
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data:

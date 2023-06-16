@@ -34,7 +34,8 @@ Route::put('/topics/{topic}/comments/{comment}', [CommentsController::class, 'up
 
 
 Route::get('/topics', [TopicController::class, 'index']);
-Route::get('/topics/{id}', [TopicController::class, 'show']);
+Route::get('/topics/{id}', [TopicController::class, 'show'])->name('topic.show');
+
 Route::post('/topics', [TopicController::class, 'store'])->withoutMiddleware(['web', 'csrf']);
 Route::put('/topics/{topic}', [TopicController::class, 'update'])->withoutMiddleware(['web', 'csrf']);
 Route::delete('/topics/{topic}', [TopicController::class, 'destroy'])->withoutMiddleware(['web', 'csrf']);
