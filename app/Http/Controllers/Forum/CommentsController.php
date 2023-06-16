@@ -5,6 +5,7 @@ use App\Models\Topic;
 use App\Http\Controllers\Controller;
 use App\Models\Comments;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CommentsController extends Controller
 {
@@ -35,7 +36,7 @@ class CommentsController extends Controller
     public function show( $topicId,  $commentId){
         try {
             $comment = Comments::findOrFail($commentId);
-            return response()->json($comment);
+            return Inertia::render('Caceta/Comentarios',$comment);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Erro ao tentar editar o comentário', 'error' => $th->getMessage()], 500);
         }
