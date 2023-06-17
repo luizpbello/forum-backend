@@ -58,16 +58,7 @@ class TopicController extends Controller
         }
     }
 
-    public function index()
-    {
-        try {
-            $topics = Topic::with('comment')->get();
-            return Inertia::render('Home', ['topics' => $topics]);
-
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Erro ao obter os tópicos', 'error' => $th->getMessage()], 500);
-        }
-    }
+   
 
     public function show(Topic $topic, $id)
     {
@@ -77,7 +68,6 @@ class TopicController extends Controller
             if (!$topic) {
                 return response()->json(['message' => 'Tópico não encontrado'], 404);
             }
-
             return Inertia::render('Topics/TopicPage', $topic->only(['id', 'title', 'content', 'comment']));
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Erro ao obter o tópico', 'error' => $th->getMessage()], 500);

@@ -9,22 +9,19 @@ use Inertia\Inertia;
 
 class CommentsController extends Controller
 {
-    public function store(Request $request, Comments $comment){
-        try {
-            $validatedData = $request->validate([
-                'topic'=>'required|numeric',
-                'content' => 'required|string',
-            ]);
-        
-            $comment->content = $validatedData['content'];
-            $comment->topic_id = $request->topic;
-            $comment->save();
-        
-            return response()->json(['message' => 'Comentário criado com sucesso', 'comment' => $comment]);
-        } catch (\Throwable $th) {
-            dd($th);
-        }
+    public function store(Request $request,)
+    {
+        $validatedData = $request->validate([
+            'topic_id' => 'required|numeric',
+            'title' => 'required|string',
+            'content' => 'required|string',
+        ]);
+    
+        $comment = Comments::create($validatedData);
+    
     }
+    
+
 
 
     public function index(Topic $topic){
@@ -32,11 +29,12 @@ class CommentsController extends Controller
         return response()->json(['comments', $comments]);
     }
 
+    
 
     public function show( $topicId,  $commentId){
         try {
             $comment = Comments::findOrFail($commentId);
-            return Inertia::render('Caceta/Comentarios',$comment);
+           
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Erro ao tentar editar o comentário', 'error' => $th->getMessage()], 500);
         }
